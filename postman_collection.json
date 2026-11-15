@@ -1,0 +1,121 @@
+{
+  "info": {
+    "name": "Inventory Data Management System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000"
+    },
+    {
+      "key": "productId",
+      "value": "PASTE_PRODUCT_ID"
+    }
+  ],
+  "item": [
+    {
+      "name": "Create Product",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/products",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Gel Pen Pack of 15\",\n  \"sku\": \"STNY-PN-713\",\n  \"category\": \"Stationery\",\n  \"price\": 120,\n  \"quantity\": 48,\n  \"reorderLevel\": 20,\n  \"supplier\": \"Cello Pens\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Get All Products",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/products?page=1&limit=10&sort=-createdAt"
+      }
+    },
+    {
+      "name": "Get Product by ID",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/products/{{productId}}"
+      }
+    },
+    {
+      "name": "Update Product",
+      "request": {
+        "method": "PUT",
+        "url": "{{baseUrl}}/api/products/{{productId}}",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"price\": 140,\n  \"quantity\": 60\n}"
+        }
+      }
+    },
+    {
+      "name": "Delete Product",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/api/products/{{productId}}"
+      }
+    },
+    {
+      "name": "Low Stock Report",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/products/low-stock"
+      }
+    },
+    {
+      "name": "Category Summary",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/products/summary"
+      }
+    },
+    {
+      "name": "Restock 10",
+      "request": {
+        "method": "PATCH",
+        "url": "{{baseUrl}}/api/products/{{productId}}/stock",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"change\": 10\n}"
+        }
+      }
+    },
+    {
+      "name": "Record Sale of 3",
+      "request": {
+        "method": "PATCH",
+        "url": "{{baseUrl}}/api/products/{{productId}}/stock",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"change\": -3\n}"
+        }
+      }
+    }
+  ]
+}
